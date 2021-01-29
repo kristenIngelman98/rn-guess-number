@@ -10,7 +10,14 @@ const StartGameScreen = props => {
             <Text>Start a New Game!</Text>
             <Card style={styles.inputContainer}>
                 <Text style={styles.title}>Select a Number</Text>
-                <Input style={styles.input} />
+                <Input 
+                    style={styles.input}
+                    blurOnSubmit
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="numeric"
+                    maxLength={2}
+                     />
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}><Button title="Reset" onPress={() => {}} color={Colors.secondary} /></View>
                     <View style={styles.button}><Button title="Confirm" onPress={() => {}} color={Colors.primary} /></View>
