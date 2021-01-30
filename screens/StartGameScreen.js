@@ -1,12 +1,35 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState } from 'react';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Button, 
+    TouchableWithoutFeedback,
+    Keyboard
+} from 'react-native';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Colors from '../constants/colors';
 
 const StartGameScreen = props => {
+
+    const [enteredValue, setEnteredValue] = useState('');
+
+    const numberInputHandler = inputText => {
+        // validate input here
+        // basically drop any non number value and make it an empty string (this is a fix for android)
+        setEnteredValue(inputText.replace(/[^0-9]/g), '')
+    };
+
+    const resetInputHandler = () => {
+        setEnteredValue('');
+    };
+
     return (
-        <View style={styles.screen}>
+        <TouchableWithoutFeedback onPress={() => {
+            Keyboard.dismiss();
+        }}>
+            <View style={styles.screen}>
             <Text>Start a New Game!</Text>
             <Card style={styles.inputContainer}>
                 <Text style={styles.title}>Select a Number</Text>
@@ -15,15 +38,19 @@ const StartGameScreen = props => {
                     blurOnSubmit
                     autoCapitalize="none"
                     autoCorrect={false}
-                    keyboardType="numeric"
+                    keyboardType="number-pad"
                     maxLength={2}
-                     />
+                    onChangeText={numberInputHandler}
+                    value={enteredValue}
+                />
                 <View style={styles.buttonContainer}>
-                    <View style={styles.button}><Button title="Reset" onPress={() => {}} color={Colors.secondary} /></View>
+                    <View style={styles.button}><Button title="Reset" onPress={resetInputHandler} color={Colors.secondary} /></View>
                     <View style={styles.button}><Button title="Confirm" onPress={() => {}} color={Colors.primary} /></View>
                 </View>
-            </Card>
-        </View>
+                </Card>
+            </View>
+        </TouchableWithoutFeedback>
+        
     );
 };
 
