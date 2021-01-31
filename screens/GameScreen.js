@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -23,6 +23,17 @@ const GameScreen = props => {
     // initial boundaries used for random number generation
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
+
+    // this function, by DEFAULT runs AFTER every render cycle of this component
+    useEffect(() => {
+        // checking if generated num is the same as user choice - in order to end the game
+        if (currentGuess === props.userChoice) {
+            
+
+        }
+
+
+    });
 
     const nextGuessHandler = direction => {
         // should get lower or greater
